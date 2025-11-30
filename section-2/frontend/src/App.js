@@ -25,6 +25,7 @@ import HomePage from "./pages/Home";
 import ErrorPage from "./pages/Error";
 import EventsPage from "./pages/Events";
 import EventDetailPage from "./pages/EventDetail";
+import EventsRootLayout from "./pages/EventsRoot";
 import NewEventPage from "./pages/NewEvent";
 import EditEventPage from "./pages/EditEvent";
 import RootLayout from "./pages/Root";
@@ -32,10 +33,13 @@ import RootLayout from "./pages/Root";
 const router = createBrowserRouter([
     { path: '/', element: <RootLayout />, errorElement: <ErrorPage />, children: [
       { index: true, element: <HomePage /> },
-      { path: 'events', element: <EventsPage /> },
-      { path: 'events/new', element: <NewEventPage /> }, // more specific routes first
-      { path: 'events/:eventId', element: <EventDetailPage /> },
-      { path: 'events/:eventId/edit', element: <EditEventPage /> }
+      // related paths are relative to parent route path
+      { path: 'events', element: <EventsRootLayout />, children: [
+        { index: true, element: <EventsPage /> },
+        { path: 'new', element: <NewEventPage /> },
+        { path: ':eventId', element: <EventDetailPage /> },
+        { path: ':eventId/edit', element: <EditEventPage /> }
+      ]}
     ]}
 ]);
 
