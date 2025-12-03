@@ -4,8 +4,9 @@ import EventsList from '../components/EventsList';
 
 function EventsPage() {
 
-  const fetchedEvents = useLoaderData();
-  
+  const data = useLoaderData();
+  const fetchedEvents = data.events;
+
   return (
     <EventsList events={fetchedEvents} />
   );
@@ -19,7 +20,7 @@ export async function loader() {
   if (!response.ok) {
     throw new Error('Could not fetch events.');
   } else {
-    const resData = await response.json();
-    return resData.events;
+    
+    return response; // response.json() is called automatically by react-router
   }
 }
