@@ -33,6 +33,7 @@ import { loader as eventsLoader } from "./pages/Events";
 
 
 const router = createBrowserRouter([
+    // error bubbles up the route tree
     { path: '/', element: <RootLayout />, errorElement: <ErrorPage />, children: [
       { index: true, element: <HomePage /> },
       // related paths are relative to parent route path
