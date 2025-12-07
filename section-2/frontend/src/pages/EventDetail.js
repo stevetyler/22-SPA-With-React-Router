@@ -1,15 +1,28 @@
-import { useParams } from "react-router-dom";
+import EventItem from "../components/EventItem";  
+import { useLoaderData } from "react-router-dom";
 
 function EventDetailPage() {
-  const params = useParams();
-  const eventId = params.eventId;
-  
+  const data = useLoaderData();
+
   return (
-    <>
-      <h1>Event Detail Page</h1>
-      <p>Event {eventId}</p>
+    <>  
+      <EventItem event={data.event} />
     </>
   );
 }
 
 export default EventDetailPage; 
+
+export async function loader({ request, params }) {
+    // can't use useParams hook here, but can use ID
+    const id = params.eventId; 
+
+    const response = await fetch("http://localhost:8080/events/" + id);
+
+    if(!response.ok) {
+      throw new Error({message: 'Could not fetch details'})
+    } else {
+      return response;
+    }
+}
+  
