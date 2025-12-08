@@ -26,7 +26,7 @@ import ErrorPage from "./pages/Error";
 import EventsPage from "./pages/Events";
 import EventDetailPage from "./pages/EventDetail";
 import EventsRootLayout from "./pages/EventsRoot";
-import NewEventPage from "./pages/NewEvent";
+import NewEventPage, { action as NewEventAction } from "./pages/NewEvent";
 import EditEventPage from "./pages/EditEvent";
 import RootLayout from "./pages/Root";
 import { loader as eventsLoader } from "./pages/Events";
@@ -39,7 +39,6 @@ const router = createBrowserRouter([
       // related paths are relative to parent route path
       { path: 'events', element: <EventsRootLayout />, children: [
         { index: true, element: <EventsPage />, loader: eventsLoader },
-        { path: 'new', element: <NewEventPage /> },
         { path: ':eventId', 
           id: 'event-detail',
           loader: eventDetailLoader, // reuse loader data in multiple routes
@@ -47,7 +46,8 @@ const router = createBrowserRouter([
             { index: true, element: <EventDetailPage /> },
             { path: 'edit', element: <EditEventPage /> }
           ]
-        }
+        },
+        { path: 'new', element: <NewEventPage />, action: NewEventAction }
       ]}
     ]}
 ]);
