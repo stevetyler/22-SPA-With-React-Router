@@ -10,7 +10,7 @@ function EventForm({ method, event }) {
 
   return (
     // form sent to action function of route that rendered this component
-    <Form method='post' className={classes.form}>
+    <Form method='post' className={classes.form}> {/* use action attribute to specify where form data should be sent */}
       <p>
         <label htmlFor="title">Title</label>
         <input id="title" type="text" name="title" required defaultValue={event ? event.title : ''}/>

@@ -1,12 +1,17 @@
-import { Link } from 'react-router-dom';
+import { useSubmit, Link } from 'react-router-dom';
 
 import classes from './EventItem.module.css';
 
 function EventItem({ event }) {
+  const submit = useSubmit();
 
   function startDeleteHandler() {
-    // ...
-  }
+    const proceed = window.confirm('Are you sure you want to delete this event?');
+
+    if (proceed) {
+      submit(null, { method: 'delete' }); // check which route we are on, shouldn't need the action attribute
+    }
+  }  
 
   return (
     <article className={classes.event}>

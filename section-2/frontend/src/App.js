@@ -31,6 +31,7 @@ import EditEventPage from "./pages/EditEvent";
 import RootLayout from "./pages/Root";
 import { loader as eventsLoader } from "./pages/Events";
 import { loader as eventDetailLoader } from "./pages/EventDetail";
+import { action as deleteEventAction } from "./pages/EventDetail";
 
 const router = createBrowserRouter([
     // error bubbles up the route tree
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
           id: 'event-detail',
           loader: eventDetailLoader, // reuse loader data in multiple routes
           children: [
-            { index: true, element: <EventDetailPage /> },
+            { index: true, element: <EventDetailPage  />, action: deleteEventAction, },
             { path: 'edit', element: <EditEventPage /> }
           ]
         },
