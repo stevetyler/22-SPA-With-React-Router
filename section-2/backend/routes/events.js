@@ -57,7 +57,7 @@ router.post('/', async (req, res, next) => {
 
   try {
     await add(data);
-    res.status(201).json({ message: 'Event saved.', event: data });
+    res.status(201).json({ message: 'Event saved.' });
   } catch (error) {
     next(error);
   }
@@ -102,7 +102,7 @@ router.patch('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
     await remove(req.params.id);
-    res.json({ message: 'Event deleted.' });
+    res.status(201).json({ message: 'Event deleted.' });
   } catch (error) {
     next(error);
   }
