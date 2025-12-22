@@ -1,8 +1,9 @@
-import { useNavigate, useNavigation } from 'react-router-dom';
+import { useNavigate, useNavigation, useActionData } from 'react-router-dom';
 import { Form } from 'react-router-dom'; // special form that works with router, supports method and action
 import classes from './EventForm.module.css';
 
 function EventForm({ method, event }) {
+  const data = useActionData();
   const navigate = useNavigate();
   const navigation = useNavigation();
 
@@ -15,6 +16,13 @@ function EventForm({ method, event }) {
   return (
     // form sent to action function of route that rendered this component
     <Form method='post' className={classes.form}> {/* use action attribute to specify where form data should be sent */}
+      {data && data.errors && (
+        <ul>
+          {Object.values(data.errors).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
       <p>
         <label htmlFor="title">Title</label>
         <input id="title" type="text" name="title" required defaultValue={event ? event.title : ''}/>
