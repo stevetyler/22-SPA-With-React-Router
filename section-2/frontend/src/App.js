@@ -26,12 +26,13 @@ import ErrorPage from "./pages/Error";
 import EventsPage from "./pages/Events";
 import EventDetailPage from "./pages/EventDetail";
 import EventsRootLayout from "./pages/EventsRoot";
-import NewEventPage, { action as NewEventAction } from "./pages/NewEvent";
+import NewEventPage from "./pages/NewEvent";
 import EditEventPage from "./pages/EditEvent";
 import RootLayout from "./pages/Root";
 import { loader as eventsLoader } from "./pages/Events";
 import { loader as eventDetailLoader } from "./pages/EventDetail";
 import { action as deleteEventAction } from "./pages/EventDetail";
+import { action as newOrEditEventAction } from "./components/EventForm";
 
 const router = createBrowserRouter([
     // error bubbles up the route tree
@@ -45,10 +46,10 @@ const router = createBrowserRouter([
           loader: eventDetailLoader, // reuse loader data in multiple routes
           children: [
             { index: true, element: <EventDetailPage  />, action: deleteEventAction, },
-            { path: 'edit', element: <EditEventPage /> }
+            { path: 'edit', element: <EditEventPage />, action: newOrEditEventAction }
           ]
         },
-        { path: 'new', element: <NewEventPage />, action: NewEventAction }
+        { path: 'new', element: <NewEventPage />, action: newOrEditEventAction }
       ]}
     ]}
 ]);
