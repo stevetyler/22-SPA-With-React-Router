@@ -45,6 +45,6 @@ export async function loadEvents() {
 
 export async function loader() {
   return {
-    events: await loadEvents()
+    events: loadEvents()
   };
 }
